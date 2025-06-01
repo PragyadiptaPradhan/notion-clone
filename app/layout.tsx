@@ -1,7 +1,10 @@
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-providers";
+import { ConvexClientProvider } from "@/components/providers/convex-provider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,18 +19,18 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "2Brain",
   description: "The connected workspace where better, fater work happens.",
-  icons:[
+  icons: [
     {
       media: "(prefers-color-scheme: light)",
-      url:"/logo.svg",
-      href:"/logo.svg",
+      url: "/logo.svg",
+      href: "/logo.svg",
     },
     {
       media: "(prefers-color-scheme: dark)",
       url: "/logo-dark.svg",
       href: "/logo-dark.svg",
-    }
-  ]
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -40,10 +43,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange
-        storageKey="2brain-theme-2">
-          {children}
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            storageKey="2brain-theme-2"
+          >
+            <Toaster position="bottom-center" />
+            {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
