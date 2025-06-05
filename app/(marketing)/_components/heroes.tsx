@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export const Heroes = () => {
     return (
-      <div className="flex flex-col items-center justify-center max-w-5xl">
+      <div className="flex flex-col items-center justify-center max-w-5xl mx-auto">
+      {/* //max-w-3xl mx-auto space-y-4 flex flex-col items-center text-center */}
         <div className="flex item-center">
           <div
             className="relative w-[300px] h-[300px] sm:w-[350px] 

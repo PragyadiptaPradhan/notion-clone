@@ -163,7 +163,7 @@ export const Item = ({
               side="right"
               forceMount
             >
-              <DropdownMenuItem onClick={onArchive}>
+              <DropdownMenuItem onClick={onArchive} >
                 <Trash className="h-4 w-4 mr-2"/>
                 Delete
               </DropdownMenuItem>
