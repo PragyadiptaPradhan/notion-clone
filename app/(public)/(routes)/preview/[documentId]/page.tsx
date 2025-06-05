@@ -23,7 +23,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     [],
   );
 
-  const document = useQuery(api.document.getById, {
+  const document = useQuery(api.document.getPreviewById, {
     documentId: params.documentId,
   });
 

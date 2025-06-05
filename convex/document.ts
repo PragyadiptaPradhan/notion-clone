@@ -356,3 +356,33 @@ export const removeCoverImage = mutation({
 
   },
 });
+
+// Find your getById query and update it to allow public access to published documents
+export const getPreviewById = query({
+  args: { documentId: v.id("documents") },
+  handler: async (ctx, args) => {
+    const document = await ctx.db.get(args.documentId);
+
+    if (!document) {
+      return null;
+    }
+
+    // Allow access to published documents without authentication
+    if (document.isPublished) {
+      return document;
+    }
+
+    // For non-published documents, require authentication
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+    const userId = identity.subject;
+    // Check if user has access to this document
+    if (document.userId !== userId) {
+      // Add any other access control checks here if needed
+      throw new Error("Not authorized");
+    }
+    return document;
+  },
+});
