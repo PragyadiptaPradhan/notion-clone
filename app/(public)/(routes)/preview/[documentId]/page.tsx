@@ -12,10 +12,11 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 
 interface DocumentIdPageProps {
-  params: {
-    documentId: Id<"documents">;
-  };
-}
+    params: Promise<{
+        documentId: Id<"documents">;
+    }>;
+};
+
 
 const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   const Editor = useMemo(
@@ -23,15 +24,17 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     [],
   );
 
+  const { documentId } = use(params);
+
   const document = useQuery(api.document.getPreviewById, {
-    documentId: params.documentId,
+    documentId: documentId,
   });
 
   const update = useMutation(api.document.update);
 
   const onChange = (content: string) => {
     update({
-      id: params.documentId,
+      id: documentId,
       content,
     });
   };
