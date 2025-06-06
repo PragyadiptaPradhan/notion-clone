@@ -8,7 +8,6 @@ import { ModeToggle } from "@/components/mode-toggel";
 import { useConvexAuth } from "convex/react";
 import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
-import { Ghost } from "lucide-react";
 import { Spinner } from "@/components/spinner";
 import Link from "next/link";
 
